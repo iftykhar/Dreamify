@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('dreams', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->string('content');
             $table->timestamps();
+            // $table->created_at();
+            // $table->updated_at();
         });
     }
 
