@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class DreamController extends Controller
 {
@@ -11,7 +14,15 @@ class DreamController extends Controller
      */
     public function index()
     {
-        return view("admin.dreams.index");
+        $dreams = DB::table('dreams')
+        ->where('user_id', auth()->user()->id)
+        ->get();
+
+        $dreams->map(function($dream){
+            $dream->created_at = Carbon::make($dream->created_at);
+            $dream->updated_at = Carbon::make($dream->updated_at);
+        });
+        return view("admin.dreams.index",compact('dreams'));
     }
 
     /**
@@ -19,7 +30,7 @@ class DreamController extends Controller
      */
     public function create()
     {
-        dd("This is the create page");
+        return view('admin.dreams.create');
     }
 
     /**
@@ -27,7 +38,27 @@ class DreamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'content' =>'required|max:255|string',
+        ]);
+
+        // $data = [
+        //     'user_id' => auth()->user()->id,
+        //     'content'=> $validated['content'],
+        // ];
+
+        $dream = DB::table('dreams')->insertGetId([
+            ...$validated,
+            'user_id' => auth()->user()->id,
+            'created_at'=> now(),
+            'updated_at'=> now()
+        ]);
+
+        if($dream){
+            return to_route('dreams.index');
+        }
+
+        return back();
     }
 
     /**
@@ -43,7 +74,17 @@ class DreamController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $dream = DB::table('dreams')
+            ->where('id',$id)
+            ->where('user_id',auth()->user()->id)
+            ->first();
+
+                if(!$dream){
+                    return to_route('dreams.index');
+                }
+
+            return  view('admin.dreams.edit',compact('dream'));
+
     }
 
     /**
