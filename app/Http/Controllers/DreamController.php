@@ -115,6 +115,14 @@ class DreamController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
+
+        $dream = DB::table('dreams')
+        ->where([
+            'id' => $id,
+            'user_id' => auth()->user()->id
+        ])->delete();
+
+        return back();
     }
 }

@@ -45,10 +45,25 @@
                                         {{ $dream->created_at->diffForhumans() }}
                                     </td>
 
-                                    <td class="px-6 py-4 text-right space-x-2">
+                                    {{-- <td class="px-6 py-4 text-right space-x-2">
                                         <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline" href="{{ route('dreams.edit',$dream->id) }}">Edit</a>
-                                        <a href="#" class="font-medium text-red-600 dark:text-blue-500 hover:underline">Delete</a>
+                                        <form action="{{ route('dreams.destroy',$dream->id) }}" method="post" onsubmit="return confirm('Are you sure?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="submit" value="Delete" class="font-medium text-red-600 dark:text-blue-500 hover:underline">
+
+                                    </td> --}}
+                                    <td class="px-6 py-4 text-right space-x-2">
+                                        <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline" href="{{ route('dreams.edit', $dream->id) }}">Edit</a>
+
+                                        <!-- Make the Delete form independent -->
+                                        <form action="{{ route('dreams.destroy', $dream->id) }}" method="POST" onsubmit="return confirm('Are you sure?');" style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="submit" value="Delete" class="font-medium text-red-600 dark:text-blue-500 hover:underline">
+                                        </form>
                                     </td>
+
 
 
                                 </tr>
