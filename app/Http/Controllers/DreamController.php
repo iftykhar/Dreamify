@@ -66,7 +66,9 @@ class DreamController extends Controller
      */
     public function show(string $id)
     {
-        //
+       return view('admin.dreams.show',[
+        'dream'=> DB::table('dreams')->where('id',$id)->first(),
+       ]);
     }
 
     /**
@@ -92,7 +94,20 @@ class DreamController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'content' =>'required|max:255|string',
+        ]);
+
+        $dream = DB::table('dreams')
+        ->where('id',$id)
+        ->where('user_id',auth()->user()->id)
+        ->update([
+            ...$validated,
+            'updated_at'=> now()
+        ]);
+
+        // dd($dream);
+        return to_route('dreams.show',$id);
     }
 
     /**
