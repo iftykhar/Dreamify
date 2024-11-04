@@ -3,9 +3,36 @@
 use App\Http\Controllers\DreamController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/', function () {
-    return view('welcom-2');
+    $dreams = DB::table('dreams')
+    ->join('users','dreams.user_id','=','users.id')
+    ->select(
+        'dreams.id as dream_id',
+        'dreams.content',
+        'dreams.created_at',
+        'dreams.user_id',
+        'users.name',
+        'users.email'
+    )
+    ->get();
+
+
+    $dreams->map(function($dream){
+        // $dream->created_at = Carbon::make($dream->created_at);
+        $dream->created_at = Carbon::make($dream->created_at);
+
+    });
+
+    // dd($dreams);
+    return view('welcom-2',compact('dreams'));
 });
 
 

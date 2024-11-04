@@ -17,6 +17,13 @@
 <body>
 
 
+   @forelse ( $dreams as $dream)
+    <h1>{{ $dream->content }}</h1>
+    <pre>by {{ $dream->name }}</pre>
+    <small>{{ $dream->created_at->diffForhumans() }}</small>
+   @empty
+    No dreams posted yet
+   @endforelse
 
 
 </body>
