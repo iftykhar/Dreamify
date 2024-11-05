@@ -32,12 +32,15 @@ Route::get('/', function () {
     });
 
     // dd($dreams);
-    return view('welcom-2',compact('dreams'));
+    return view('welcome-1',compact('dreams'));
 });
 
+// Route::get('/test',function(){
+//     return view('welcome-1');
+// });
 
 
-Route::resource('admin/dreams', DreamController::class);
+Route::resource('admin/dreams', DreamController::class)->middleware('auth');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
