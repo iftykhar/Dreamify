@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             'is_admin' => true,
         ]);
 
-        for( $i = 0; $i < 10; $i++ ) {
+        for( $i = 0; $i < 20; $i++ ) {
             DB::table('dreams')->insert([
                 'user_id'=> DB::table('users')->first()->id,
                 'content'=> fake()->realText(100),

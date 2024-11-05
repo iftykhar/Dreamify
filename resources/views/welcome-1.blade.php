@@ -113,9 +113,11 @@
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-6 text-gray-900">
-                            <h1>{{ $dream->content }}</h1>
-                            <pre>by {{ $dream->name }}</pre>
-                            <small>{{ $dream->created_at->diffForhumans() }}</small>
+                            <h1 class="text-xl font-semibold text-gray-800 mb-2">{{ $dream->content }}</h1>
+                            <p class="text-gray-600 text-sm">by <span class="font-medium">{{ $dream->name }}</span></p>
+                            <time datetime="{{ $dream->created_at }}" class="text-xs text-gray-500">
+                                {{ $dream->created_at->diffForHumans() }}
+                            </time>
                         </div>
                     </div>
                 </div>
