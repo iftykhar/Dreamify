@@ -4,8 +4,7 @@ Dremify is a Laravel-powered, text-focused platform designed to inspire and shar
 
 ## Features
     - User Accounts: Register and log in to save personal collections.
-    - Text Collection: Curate, explore, and share inspiring text-based content.
-    - Search and Explore: Discover curated content shared by other users.
+    - Text Collection: Curate, explore.
     - Simple and Elegant UI: Clean and minimalistic design focused on text.
 
 ### Requirements
