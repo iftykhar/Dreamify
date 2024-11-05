@@ -57,9 +57,11 @@ To set up Dremify on your local machine, follow these steps:
 ## Usage
     After setting up, you can access the app in your browser at http://localhost:8000.
 
-## Register / Login: Create an account to start curating and exploring text-based content.
+## Register / Login: 
+    Create an account to start curating and exploring text-based content.
 
-## Collections: Browse collections, save favorite quotes or inspirations, and explore others’ contributions.
+## Collections: 
+    Browse collections, save favorite quotes or inspirations, and explore others’ contributions.
 ## Testing
 ### Run tests with:
 
